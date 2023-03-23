@@ -15,6 +15,8 @@ export default function generateRareComics(comics, total_items) {
       item.comicType = "comum";
     }
 
+    item.count = 1;
+
     return item;
   });
 

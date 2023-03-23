@@ -40,7 +40,7 @@ const initialState = {
 };
 
 export const comicsSlice = createSlice({
-  name: "address",
+  name: "comics",
   initialState: initialState,
   reducers: {
     clearState: (state) => {

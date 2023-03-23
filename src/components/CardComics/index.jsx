@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
 import { formatter } from "@/utils/formatterMoney";
 import { exchangeRates } from "@/utils/exchangeRates";
+
+import { setItem } from "@/store/cart";
 
 import {
   CardHeader,
@@ -14,12 +17,18 @@ import {
 } from "./styles";
 
 export default function CardComics({ item }) {
-  const { id, title, thumbnail, prices, comicType } = item;
+  const dispatch = useDispatch();
+
+  const { title, thumbnail, prices, comicType } = item;
 
   const [isLoadingImage, setIsLoadingImage] = useState(true);
 
   const handleImageLoaded = () => {
     setIsLoadingImage(false);
+  };
+
+  const handleAddComic = (item) => {
+    dispatch(setItem(item));
   };
 
   return (
@@ -46,7 +55,7 @@ export default function CardComics({ item }) {
             ? formatter.format(prices[0].price * exchangeRates.BRL)
             : "Grátis"}
         </span>
-        <button>Comprar</button>
+        <button onClick={() => handleAddComic(item)}>Comprar</button>
       </FooterCard>
     </ContainerCard>
   );
