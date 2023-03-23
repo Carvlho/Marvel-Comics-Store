@@ -6,7 +6,7 @@ import { ReactComponent as IconCart } from "@/assets/svg/IconCart.svg";
 
 import { ContainerNavbar, ContentNavbar, Logo } from "./styles";
 
-export default function Navbar() {
+export default function Navbar({ openCart }) {
   return (
     <ContainerNavbar>
       <ContentNavbar>
@@ -14,7 +14,11 @@ export default function Navbar() {
           <source srcSet={MarvelLogoSVG} type="image/svg+xml" />
           <img src={MarvelLogo} alt="Marvel Logo" />
         </Logo>
-        <IconCart arial-label="Icone do carrinho" fill="#fff" />
+        <IconCart
+          arial-label="Icone do carrinho"
+          fill="#fff"
+          onClick={openCart}
+        />
       </ContentNavbar>
     </ContainerNavbar>
   );
