@@ -35,6 +35,6 @@ export const ContentNavbar = styled.div`
 
 export const Logo = styled.picture`
   img {
-    max-height: 60px;
+    max-height: 50px;
   }
 `;

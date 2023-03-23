@@ -8,7 +8,7 @@ const backgroundAnimation = keyframes`
 
 const imageAnimation = keyframes`
   100% {
-    transform: scale3d(1.1, 1.1, 1.1);
+    transform: scale(1.05);
   }
 `;
 
@@ -178,13 +178,21 @@ export const FooterCard = styled.div`
   }
 
   button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     font-size: 16px;
     font-weight: 600;
     color: #242325;
 
-    cursor: pointer;
+    border: 1px solid #242325;
+    border-radius: 8px;
 
-    border: none;
-    background: transparent;
+    background-color: transparent;
+
+    padding: 5px 8px;
+
+    cursor: pointer;
   }
 `;

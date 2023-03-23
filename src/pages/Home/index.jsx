@@ -20,7 +20,7 @@ export default function Home() {
   const { comics, isLoading } = useSelector(comicsSelector);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 12;
+  const itemsPerPage = 20;
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
