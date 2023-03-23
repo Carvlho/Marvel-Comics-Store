@@ -3,20 +3,22 @@ import styled from "styled-components";
 export const ContainerHome = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 150px);
+  grid-row-gap: 1rem;
+  grid-column-gap: 12px;
+
   -webkit-box-pack: center;
   justify-content: center;
-  gap: 15px;
 
   padding: 100px 30px;
 
   @media screen and (max-width: 425px) {
     grid-template-columns: repeat(1, 230px);
-    grid-gap: 2rem;
+    grid-gap: 1rem;
   }
 
-  @media screen and (min-width: 428px) {
-    grid-template-columns: repeat(1, 250px);
-    grid-gap: 2rem;
+  @media screen and (min-width: 426px) {
+    grid-template-columns: repeat(2, 180px);
+    grid-gap: 1rem;
   }
 
   @media screen and (min-width: 640px) {
@@ -31,12 +33,15 @@ export const ContainerHome = styled.div`
 
   @media screen and (min-width: 1024px) {
     grid-template-columns: repeat(4, 230px);
-    grid-gap: 2rem;
+    grid-row-gap: 2rem;
+    grid-column-gap: 1rem;
+  }
+
+  @media screen and (min-width: 1280px) {
+    grid-template-columns: repeat(5, 230px);
   }
 
   @media screen and (min-width: 1440px) {
     grid-template-columns: repeat(5, 250px);
-
-    grid-column: 1 / 5;
   }
 `;

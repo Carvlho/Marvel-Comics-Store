@@ -6,7 +6,7 @@ const backgroundAnimation = keyframes`
   }
 `;
 
-const imageAnimation = keyframes`
+const scaleAnimation = keyframes`
   100% {
     transform: scale(1.05);
   }
@@ -48,10 +48,10 @@ export const ContainerCard = styled.div`
   :after {
     content: "";
     position: absolute;
-    top: -2px;
-    left: -2px;
-    height: calc(100% + 4px);
-    width: calc(100% + 4px);
+    top: -3px;
+    left: -3px;
+    height: calc(100% + 6px);
+    width: calc(100% + 6px);
     background: ${({ isRare }) =>
       isRare
         ? `linear-gradient(
@@ -94,7 +94,7 @@ export const SkeletonLoading = styled.div`
 
 export const CardHeader = styled.div`
   :hover img {
-    animation: ${imageAnimation} 0.5s ease-out forwards;
+    animation: ${scaleAnimation} 0.5s ease-out forwards;
   }
 `;
 
@@ -104,7 +104,6 @@ export const ImageCard = styled.img`
   position: relative;
 
   width: 100%;
-  height: 258px;
   object-fit: contain;
 
   border-radius: 3px;
@@ -194,5 +193,16 @@ export const FooterCard = styled.div`
     padding: 5px 8px;
 
     cursor: pointer;
+
+    :hover {
+      animation: ${scaleAnimation} 0.5s ease-out forwards;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    span,
+    button {
+      font-size: 14px;
+    }
   }
 `;
