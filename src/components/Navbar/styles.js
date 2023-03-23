@@ -6,6 +6,8 @@ export const ContainerNavbar = styled.nav`
   width: 100%;
 
   background-color: #000000;
+
+  z-index: 2;
 `;
 
 export const ContentNavbar = styled.div`
