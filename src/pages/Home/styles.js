@@ -7,21 +7,35 @@ export const ContainerHome = styled.div`
   justify-content: center;
   gap: 15px;
 
-  padding-top: 100px;
+  padding: 100px 30px;
+
+  @media screen and (max-width: 425px) {
+    grid-template-columns: repeat(1, 230px);
+    grid-gap: 2rem;
+  }
+
+  @media screen and (min-width: 428px) {
+    grid-template-columns: repeat(1, 250px);
+    grid-gap: 2rem;
+  }
+
+  @media screen and (min-width: 640px) {
+    grid-template-columns: repeat(2, 230px);
+    grid-gap: 2rem;
+  }
 
   @media screen and (min-width: 768px) {
-    grid-column: 1 / 4;
+    grid-template-columns: repeat(3, 220px);
+    grid-gap: 2rem;
   }
 
   @media screen and (min-width: 1024px) {
-    grid-template-columns: repeat(3, 200px);
-    grid-gap: 25px;
-
-    grid-column: 1 / 4;
+    grid-template-columns: repeat(4, 230px);
+    grid-gap: 2rem;
   }
 
-  @media screen and (min-width: 1366px) {
-    grid-template-columns: repeat(4, 200px);
+  @media screen and (min-width: 1440px) {
+    grid-template-columns: repeat(5, 250px);
 
     grid-column: 1 / 5;
   }
