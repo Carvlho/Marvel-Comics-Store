@@ -98,12 +98,34 @@ export const ButtonClose = styled.button`
   }
 `;
 
+export const FadeInAnimation = keyframes`
+    0% {
+        opacity: 0;
+        top: 40px;
+    }
+
+    100% {
+        opacity: 1;
+        top: 0px;
+    }
+`;
+
+export const ContainerContentModal = styled.div`
+  width: 100%;
+  height: 100%;
+
+  animation: ${FadeInAnimation} 0.5s both;
+`;
+
 export const ContainerItems = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   gap: 3rem;
+
+  opacity: ${({ isVisible }) => (isVisible ? "0" : "1")};
+  transition: opacity 0.5s ease-in-out;
 
   max-height: 60vh;
 

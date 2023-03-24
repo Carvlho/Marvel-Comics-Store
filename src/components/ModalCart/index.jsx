@@ -11,12 +11,22 @@ import { formatter } from "@/utils/formatterMoney";
 import { exchangeRates } from "@/utils/exchangeRates";
 import cupounValidate from "@/utils/cupounValidate";
 
-import { cartSelector, removeItem, removeItemQTD, setItem } from "@/store/cart";
+import EmptyCart from "../EmptyCart";
+import CartSuccess from "../CartSuccess";
+
+import {
+  cartSelector,
+  clearState,
+  removeItem,
+  removeItemQTD,
+  setItem,
+} from "@/store/cart";
 
 import {
   ButtonClose,
   ButtonDelete,
   ButtonQTD,
+  ContainerContentModal,
   ContainerItems,
   Info,
   Item,
@@ -33,7 +43,6 @@ import {
   ModalView,
   RarityInfo,
 } from "./styles";
-import EmptyCart from "../EmptyCart";
 
 export default function ModalCart({ isOpen, close }) {
   const dispatch = useDispatch();
@@ -45,6 +54,8 @@ export default function ModalCart({ isOpen, close }) {
   const [usedCoupons, setUsedCoupons] = useState([]);
   const [coupon, setCoupon] = useState("");
   const [couponError, setCouponError] = useState("");
+
+  const [checkoutSuccess, setCheckoutSuccess] = useState(false);
 
   useEffect(() => {
     if (cart.length < 1) {
@@ -149,6 +160,19 @@ export default function ModalCart({ isOpen, close }) {
     return discount;
   };
 
+  const handleCheckout = () => {
+    setCheckoutSuccess(true);
+  };
+
+  const handleBackHome = () => {
+    close();
+
+    setTimeout(() => {
+      setCheckoutSuccess(false);
+      dispatch(clearState());
+    }, [500]);
+  };
+
   return (
     <ModalContainer isOpen={isOpen}>
       <ModalOverlay
@@ -164,142 +188,162 @@ export default function ModalCart({ isOpen, close }) {
               </ButtonClose>
             </ModalHeaderContent>
           </ModalHeader>
-          {cart.length > 0 ? (
-            <>
-              <ContainerItems>
-                <Info>
-                  <IconInfo />
-                  Máximo de 10 itens por quadrinho
-                </Info>
-                {cart.map((item) => {
-                  return (
-                    <Item key={item.id}>
-                      <ItemImage
-                        src={`${item.thumbnail.path}.${item.thumbnail.extension}`}
-                        alt={item.title}
-                        draggable={false}
-                        isLoading={isLoadingImage}
-                        onLoad={() => handleImageLoaded()}
-                      />
-                      <div className="item-description">
-                        <ItemTitle>
-                          <h4>{item.title}</h4>
-                          <RarityInfo
-                            gradient={item.comicType === "raro" ? true : false}
-                          >
-                            {item.comicType}
-                          </RarityInfo>
-                        </ItemTitle>
-                        <ItemFunction>
-                          <ItemQTD>
-                            {item.count > 1 ? (
-                              <ButtonQTD onClick={() => removeQTDItem(item)}>
-                                <IconLeft />
-                              </ButtonQTD>
-                            ) : null}
-                            <p>{item.count}</p>
-                            {item.count <= 9 ? (
-                              <ButtonQTD onClick={() => addQTDItem(item)}>
-                                <IconRight />
-                              </ButtonQTD>
-                            ) : null}
-                          </ItemQTD>
-                          <ButtonDelete onClick={() => handleDeleteItem(item)}>
-                            <IconDelete /> Deletar Item
-                          </ButtonDelete>
-                        </ItemFunction>
-                        <ItemPrice>
-                          Preço:
-                          <span>
-                            {item.prices[0].price
-                              ? handlePriceItem(
-                                  item.prices[0].price * item.count
+          <ContainerContentModal>
+            {cart.length > 0 ? (
+              checkoutSuccess ? (
+                <CartSuccess
+                  isVisible={checkoutSuccess}
+                  close={handleBackHome}
+                />
+              ) : (
+                <>
+                  <ContainerItems isVisible={checkoutSuccess}>
+                    <Info>
+                      <IconInfo />
+                      Máximo de 10 itens por quadrinho
+                    </Info>
+                    {cart.map((item) => {
+                      return (
+                        <Item key={item.id}>
+                          <ItemImage
+                            src={`${item.thumbnail.path}.${item.thumbnail.extension}`}
+                            alt={item.title}
+                            draggable={false}
+                            isLoading={isLoadingImage}
+                            onLoad={() => handleImageLoaded()}
+                          />
+                          <div className="item-description">
+                            <ItemTitle>
+                              <h4>{item.title}</h4>
+                              <RarityInfo
+                                gradient={
+                                  item.comicType === "raro" ? true : false
+                                }
+                              >
+                                {item.comicType}
+                              </RarityInfo>
+                            </ItemTitle>
+                            <ItemFunction>
+                              <ItemQTD>
+                                {item.count > 1 ? (
+                                  <ButtonQTD
+                                    onClick={() => removeQTDItem(item)}
+                                  >
+                                    <IconLeft />
+                                  </ButtonQTD>
+                                ) : null}
+                                <p>{item.count}</p>
+                                {item.count <= 9 ? (
+                                  <ButtonQTD onClick={() => addQTDItem(item)}>
+                                    <IconRight />
+                                  </ButtonQTD>
+                                ) : null}
+                              </ItemQTD>
+                              <ButtonDelete
+                                onClick={() => handleDeleteItem(item)}
+                              >
+                                <IconDelete /> Deletar Item
+                              </ButtonDelete>
+                            </ItemFunction>
+                            <ItemPrice>
+                              Preço:
+                              <span>
+                                {item.prices[0].price
+                                  ? handlePriceItem(
+                                      item.prices[0].price * item.count
+                                    )
+                                  : "Grátis"}
+                              </span>
+                            </ItemPrice>
+                          </div>
+                        </Item>
+                      );
+                    })}
+                  </ContainerItems>
+                  <ModalFooter>
+                    {usedCoupons.length > 0 ? (
+                      <div className="content-coupons">
+                        {usedCoupons.map((item, index) => (
+                          <button
+                            key={index}
+                            onClick={() =>
+                              setUsedCoupons(
+                                usedCoupons.filter(
+                                  (coupon) => coupon.name != item.name
                                 )
-                              : "Grátis"}
-                          </span>
-                        </ItemPrice>
+                              )
+                            }
+                          >
+                            <p>{item.name}</p>
+                            <IconClose />
+                          </button>
+                        ))}
                       </div>
-                    </Item>
-                  );
-                })}
-              </ContainerItems>
-              <ModalFooter>
-                {usedCoupons.length > 0 ? (
-                  <div className="content-coupons">
-                    {usedCoupons.map((item, index) => (
-                      <button
-                        key={index}
-                        onClick={() =>
-                          setUsedCoupons(
-                            usedCoupons.filter(
-                              (coupon) => coupon.name != item.name
-                            )
-                          )
-                        }
-                      >
-                        <p>{item.name}</p>
-                        <IconClose />
-                      </button>
-                    ))}
-                  </div>
-                ) : null}
-                <form
-                  className="form-coupon"
-                  onSubmit={(e) => e.preventDefault()}
-                >
-                  <div className="input-group">
-                    <input
-                      placeholder="Código de Cupom"
-                      value={coupon}
-                      onChange={(e) => setCoupon(e.target.value)}
-                    />
-                    <button
-                      onClick={() => {
-                        handleValidateCoupon(coupon), setCoupon("");
-                      }}
+                    ) : null}
+                    <form
+                      className="form-coupon"
+                      onSubmit={(e) => e.preventDefault()}
                     >
-                      Aplicar
-                    </button>
-                  </div>
+                      <div className="input-group">
+                        <input
+                          placeholder="Código de Cupom"
+                          value={coupon}
+                          onChange={(e) => setCoupon(e.target.value)}
+                        />
+                        <button
+                          onClick={() => {
+                            handleValidateCoupon(coupon), setCoupon("");
+                          }}
+                        >
+                          Aplicar
+                        </button>
+                      </div>
 
-                  {couponError && (
-                    <div className="error-input">
-                      <p>*{couponError}</p>
-                    </div>
-                  )}
-                </form>
-
-                <div className="subtotal">
-                  <div>
-                    <h5>Preço:</h5>
-                    <h6>
-                      {formatter.format(handleTotal() * exchangeRates.BRL)}
-                    </h6>
-                  </div>
-                  <div>
-                    <h5>Desconto:</h5>
-                    <h6>
-                      {usedCoupons.length > 0
-                        ? formatter.format(handleDiscount() * exchangeRates.BRL)
-                        : "R$ 00,00"}
-                    </h6>
-                  </div>
-                  <div className="finalPrice">
-                    <h4>Preço Final:</h4>
-                    <h3>
-                      {formatter.format(
-                        (handleTotal() - handleDiscount()) * exchangeRates.BRL
+                      {couponError && (
+                        <div className="error-input">
+                          <p>*{couponError}</p>
+                        </div>
                       )}
-                    </h3>
-                  </div>
-                </div>
+                    </form>
 
-                <button className="btn-purchase">Finalizar compra</button>
-              </ModalFooter>
-            </>
-          ) : (
-            <EmptyCart close={close} />
-          )}
+                    <div className="subtotal">
+                      <div>
+                        <h5>Preço:</h5>
+                        <h6>
+                          {formatter.format(handleTotal() * exchangeRates.BRL)}
+                        </h6>
+                      </div>
+                      <div>
+                        <h5>Desconto:</h5>
+                        <h6>
+                          {usedCoupons.length > 0
+                            ? formatter.format(
+                                handleDiscount() * exchangeRates.BRL
+                              )
+                            : "R$ 00,00"}
+                        </h6>
+                      </div>
+                      <div className="finalPrice">
+                        <h4>Preço Final:</h4>
+                        <h3>
+                          {formatter.format(
+                            (handleTotal() - handleDiscount()) *
+                              exchangeRates.BRL
+                          )}
+                        </h3>
+                      </div>
+                    </div>
+
+                    <button className="btn-purchase" onClick={handleCheckout}>
+                      Finalizar compra
+                    </button>
+                  </ModalFooter>
+                </>
+              )
+            ) : (
+              <EmptyCart close={close} />
+            )}
+          </ContainerContentModal>
         </ModalView>
       </ModalOverlay>
     </ModalContainer>
