@@ -35,6 +35,14 @@ export const ModalView = styled.div`
 
   right: ${({ isOpen }) => (isOpen ? 0 : "-110%")};
   transition: ${({ isOpen }) => (isOpen ? 350 : 450)}ms;
+
+  @media screen and (max-width: 768px) {
+    width: 65vw;
+  }
+
+  @media screen and (max-width: 520px) {
+    width: 100vw;
+  }
 `;
 
 export const ModalHeader = styled.div`
@@ -61,6 +69,10 @@ export const ModalHeaderContent = styled.div`
 
   h4 {
     color: #fff;
+  }
+
+  @media screen and (max-width: 280px) {
+    padding: 0 15px;
   }
 `;
 
@@ -91,10 +103,44 @@ export const ContainerItems = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  gap: 3rem;
 
-  gap: 1rem;
+  max-height: 60vh;
 
-  padding: 50px 30px;
+  padding: 20px 30px 80px;
+
+  overflow-y: auto;
+
+  @media screen and (max-width: 280px) {
+    padding: 20px 15px 60px;
+
+    max-height: 45vh;
+  }
+`;
+
+export const Info = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 14px;
+  font-weight: 500;
+  color: rgb(231, 38, 38);
+
+  svg {
+    width: 20px;
+    fill: rgb(231, 38, 38);
+
+    margin-right: 10px;
+  }
+
+  @media screen and (max-width: 425px) {
+    font-size: 12px;
+
+    svg {
+      width: 16px;
+    }
+  }
 `;
 
 export const Item = styled.div`
@@ -103,6 +149,15 @@ export const Item = styled.div`
   justify-content: space-between;
 
   width: 100%;
+
+  .item-description {
+    display: grid;
+    grid-template-columns: repeat(2, 4fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    width: 100%;
+  }
 `;
 
 export const ItemImage = styled.img`
@@ -119,9 +174,16 @@ export const ItemImage = styled.img`
 `;
 
 export const ItemTitle = styled.div`
-  max-width: 120px;
-
   text-align: center;
+
+  grid-area: 1 / 1 / 2 / 6;
+
+  @media screen and (max-width: 425px) {
+    h4,
+    div {
+      font-size: 14px;
+    }
+  }
 `;
 
 export const RarityInfo = styled.div`
@@ -168,6 +230,10 @@ export const RarityInfo = styled.div`
 export const ItemFunction = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  grid-area: 2 / 1 / 3 / 2;
 `;
 
 export const ItemQTD = styled.div`
@@ -183,6 +249,13 @@ export const ItemQTD = styled.div`
     font-size: 16px;
     font-weight: 500;
     padding: 0 10px;
+  }
+
+  @media screen and (max-width: 425px) {
+    p,
+    div {
+      font-size: 14px;
+    }
   }
 `;
 
@@ -201,6 +274,12 @@ export const ButtonQTD = styled.button`
   svg {
     width: 26px;
     height: auto;
+  }
+
+  @media screen and (max-width: 425px) {
+    svg {
+      width: 22px;
+    }
   }
 `;
 
@@ -224,6 +303,14 @@ export const ButtonDelete = styled.button`
     height: auto;
     fill: rgb(231, 38, 38);
   }
+
+  @media screen and (max-width: 425px) {
+    font-size: 12px;
+
+    svg {
+      width: 22px;
+    }
+  }
 `;
 
 export const ItemPrice = styled.div`
@@ -232,10 +319,12 @@ export const ItemPrice = styled.div`
   align-items: center;
   justify-content: center;
 
-  width: 70px;
+  width: 100%;
 
   font-size: 16px;
   font-weight: 500;
+
+  grid-area: 2 / 2 / 3 / 3;
 
   span {
     font-size: 16px;
@@ -243,5 +332,193 @@ export const ItemPrice = styled.div`
     color: #007a43;
 
     padding-top: 15px;
+  }
+
+  @media screen and (max-width: 425px) {
+    justify-content: flex-start;
+
+    font-size: 14px;
+
+    span {
+      font-size: 12px;
+    }
+  }
+`;
+
+const fadeOutAnimation = keyframes`
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+`;
+
+export const ModalFooter = styled.div`
+  position: absolute;
+  bottom: 0;
+
+  width: 100%;
+
+  padding: 30px;
+
+  background-color: #fff;
+
+  -webkit-box-shadow: 0px -8px 10px 0px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0px -8px 10px 0px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px -8px 10px 0px rgba(0, 0, 0, 0.4);
+
+  .subtotal {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    width: 100%;
+
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      width: 100%;
+    }
+
+    h5,
+    h6 {
+      font-size: 16px;
+      color: #5c5c5c;
+    }
+
+    .finalPrice {
+      h4 {
+        font-size: 20px;
+        color: #000;
+      }
+      h3 {
+        font-size: 20px;
+        font-weight: 700;
+        color: #007a43;
+      }
+    }
+  }
+
+  .content-coupons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+
+    padding-bottom: 10px;
+
+    button {
+      display: flex;
+      align-items: center;
+
+      padding: 5px 8px;
+      border-radius: 12px;
+
+      background-color: #633af8;
+
+      border: none;
+
+      cursor: pointer;
+
+      p {
+        font-size: 16px;
+        font-weight: 600;
+        color: #fff;
+
+        text-transform: uppercase;
+      }
+
+      svg {
+        width: 16px;
+        fill: #fff;
+
+        margin-left: 5px;
+      }
+    }
+  }
+
+  .form-coupon {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+    width: 100%;
+
+    padding-bottom: 15px;
+
+    .input-group {
+      display: flex;
+
+      width: 100%;
+
+      border: 1px solid #000;
+      border-radius: 12px;
+
+      input {
+        width: 100%;
+
+        padding: 8px 10px;
+
+        text-transform: uppercase;
+
+        outline: none;
+        border: none;
+        background-color: transparent;
+
+        -webkit-appearance: none;
+
+        :focus-visible {
+          border: none;
+        }
+      }
+
+      button {
+        padding: 8px 10px;
+
+        font-size: 16px;
+        font-weight: 600;
+
+        border: none;
+        background-color: transparent;
+
+        cursor: pointer;
+      }
+    }
+
+    .error-input {
+      font-size: 14px;
+      font-weight: 500;
+      color: rgb(231, 38, 38);
+
+      text-align: left;
+
+      margin-top: 5px;
+
+      animation: ${fadeOutAnimation} 1s ease-in;
+    }
+  }
+
+  .btn-purchase {
+    width: 100%;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    padding: 10px 12px;
+    margin-top: 12px;
+
+    border: 1px solid #242325;
+    border-radius: 12px;
+    background-color: transparent;
+
+    cursor: pointer;
+  }
+
+  @media screen and (max-width: 280px) {
+    padding: 15px;
   }
 `;

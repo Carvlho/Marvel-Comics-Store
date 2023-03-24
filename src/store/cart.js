@@ -25,9 +25,13 @@ export const cartSlice = createSlice({
       Object.preventExtensions(newItem);
 
       if (cartIndex >= 0) {
-        currentCart[cartIndex].count += 1;
+        if (currentCart[cartIndex].count >= 10) {
+          state.cart = currentCart;
+        } else {
+          currentCart[cartIndex].count += 1;
 
-        state.cart = currentCart;
+          state.cart = currentCart;
+        }
       } else {
         newItem.count = 1;
 
