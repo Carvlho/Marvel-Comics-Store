@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { FadeInAnimation } from "../ModalCart/styles";
 
 export const ContainerCartEmpty = styled.div`
   display: flex;
@@ -13,8 +12,6 @@ export const ContainerCartEmpty = styled.div`
   text-align: center;
 
   padding: 0 30px;
-
-  animation: ${FadeInAnimation} 1.5s both;
 
   svg {
     fill: #42464d;

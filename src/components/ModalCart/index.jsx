@@ -10,7 +10,6 @@ import { ReactComponent as IconInfo } from "@/assets/svg/IconInfo.svg";
 import { formatter } from "@/utils/formatterMoney";
 import { exchangeRates } from "@/utils/exchangeRates";
 import cupounValidate from "@/utils/cupounValidate";
-import sumItemsOnCart from "@/utils/sumItemsOnCart";
 
 import EmptyCart from "../EmptyCart";
 import CartSuccess from "../CartSuccess";
@@ -58,23 +57,11 @@ export default function ModalCart({ isOpen, close }) {
 
   const [checkoutSuccess, setCheckoutSuccess] = useState(false);
 
-  const [items, setItems] = useState(0);
-
   useEffect(() => {
     if (cart.length < 1) {
       setUsedCoupons([]);
     }
   }, [cart]);
-
-  const handleItems = () => {
-    const res = sumItemsOnCart();
-
-    if (res != items) {
-      setItems(res);
-    }
-
-    return res;
-  };
 
   const handleImageLoaded = () => {
     setIsLoadingImage(false);
@@ -96,6 +83,19 @@ export default function ModalCart({ isOpen, close }) {
     const newPrice = formatter.format(price * exchangeRates.BRL);
 
     return newPrice;
+  };
+
+  const handleItemsCart = () => {
+    const items = cart.map((item) => item.count);
+
+    const initialValue = 0;
+
+    const sum = items.reduce(
+      (accumulator, currentValue) => accumulator + currentValue,
+      initialValue
+    );
+
+    return sum;
   };
 
   const handleTotal = () => {
@@ -180,6 +180,14 @@ export default function ModalCart({ isOpen, close }) {
         onClick={(e) => (e.target.id === "modalOverlay" ? close() : null)}
       >
         <ModalView isOpen={isOpen}>
+          <ModalHeader>
+            <ModalHeaderContent>
+              <h4>Carrinho ({handleItemsCart()})</h4>
+              <ButtonClose onClick={close}>
+                <IconClose />
+              </ButtonClose>
+            </ModalHeaderContent>
+          </ModalHeader>
           <ContainerContentModal>
             {cart.length > 0 ? (
               checkoutSuccess ? (
@@ -189,14 +197,6 @@ export default function ModalCart({ isOpen, close }) {
                 />
               ) : (
                 <>
-                  <ModalHeader>
-                    <ModalHeaderContent>
-                      <h4>Carrinho ({handleItems() > 0 ? items : null})</h4>
-                      <ButtonClose onClick={close}>
-                        <IconClose />
-                      </ButtonClose>
-                    </ModalHeaderContent>
-                  </ModalHeader>
                   <ContainerItems isVisible={checkoutSuccess}>
                     <Info>
                       <IconInfo />
