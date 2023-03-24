@@ -288,7 +288,12 @@ export default function ModalCart({ isOpen, close }) {
                         <input
                           placeholder="Código de Cupom"
                           value={coupon}
-                          onChange={(e) => setCoupon(e.target.value)}
+                          autoCapitalize="false"
+                          autoFocus={false}
+                          autoComplete="off"
+                          onChange={(e) =>
+                            setCoupon(e.target.value.toUpperCase())
+                          }
                         />
                         <button
                           onClick={() => {

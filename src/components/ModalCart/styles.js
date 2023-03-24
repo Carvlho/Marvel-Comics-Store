@@ -505,6 +505,7 @@ export const ModalFooter = styled.div`
 
         font-size: 16px;
         font-weight: 600;
+        color: #242325;
 
         border: none;
         background-color: transparent;
@@ -531,6 +532,7 @@ export const ModalFooter = styled.div`
 
     font-size: 18px;
     font-weight: bold;
+    color: #242325;
 
     padding: 10px 12px;
     margin-top: 12px;

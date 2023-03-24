@@ -33,7 +33,7 @@ export default function Navbar({ openCart }) {
           <img src={MarvelLogo} alt="Marvel Logo" />
         </Logo>
         <ButtonCart onClick={openCart}>
-          <IconCart arial-label="Icone do carrinho" fill="#fff" />
+          <IconCart arial-label="Icone do carrinho" />
 
           {handleItems() > 0 ? (
             <div className="numberItems">{items}</div>

@@ -1,11 +1,11 @@
 let coupons = [
   {
-    name: "hqrara",
+    name: "HQRARA",
     type: "raro",
     discount: 10,
   },
   {
-    name: "hqcomum",
+    name: "HQCOMUM",
     type: "comum",
     discount: 20,
   },

@@ -39,7 +39,9 @@ export const ButtonCart = styled.div`
   width: 50px;
 
   > svg {
+    width: 30px;
     max-height: 30px;
+    fill: #fff;
 
     cursor: pointer;
 
