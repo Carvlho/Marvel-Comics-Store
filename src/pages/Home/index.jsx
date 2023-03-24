@@ -11,12 +11,6 @@ import { scrollToTopAnimated } from "@/utils/scrollToTopAnimated";
 import { ContainerHome } from "./styles";
 
 export default function Home() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getComics());
-  }, []);
-
   const { comics, isLoading } = useSelector(comicsSelector);
 
   const [currentPage, setCurrentPage] = useState(1);

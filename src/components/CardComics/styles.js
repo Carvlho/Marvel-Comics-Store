@@ -83,7 +83,8 @@ export const ContainerCard = styled.div`
 
 export const SkeletonLoading = styled.div`
   width: 100%;
-  height: 260px;
+  height: 100%;
+  min-height: 200px;
 
   background: #eee;
   background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
@@ -96,7 +97,8 @@ export const CardHeader = styled.div`
   cursor: pointer;
 
   :hover img {
-    animation: ${scaleAnimation} 0.5s ease-out forwards;
+    transition: all 0.17s ease-in-out;
+    transform: translate3d(0, -10px, 0);
   }
 `;
 
