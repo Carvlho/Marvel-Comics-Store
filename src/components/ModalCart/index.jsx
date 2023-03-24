@@ -67,7 +67,7 @@ export default function ModalCart({ isOpen, close }) {
   }, [cart]);
 
   const handleItems = () => {
-    const res = sumItemsOnCart();
+    const res = sumItemsOnCart(cart);
 
     if (res != items) {
       setItems(res);

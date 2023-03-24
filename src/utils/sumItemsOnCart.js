@@ -1,9 +1,4 @@
-import { useSelector } from "react-redux";
-import { cartSelector } from "@/store/cart";
-
-export default function sumItemsOnCart() {
-  const { cart } = useSelector(cartSelector);
-
+export default function sumItemsOnCart(cart) {
   const items = cart.map((item) => item.count);
 
   const initialValue = 0;

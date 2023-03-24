@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { GlobalStyle } from "./globalStyles";
 
 import Navbar from "@/components/Navbar";

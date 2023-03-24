@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { cartSelector } from "@/store/cart";
 
 import MarvelLogoSVG from "@/assets/svg/marvel_logo.svg";
 import MarvelLogo from "@/assets/marvel_logo.png";
@@ -9,10 +11,12 @@ import sumItemsOnCart from "@/utils/sumItemsOnCart";
 import { ButtonCart, ContainerNavbar, ContentNavbar, Logo } from "./styles";
 
 export default function Navbar({ openCart }) {
+  const { cart } = useSelector(cartSelector);
+
   const [items, setItems] = useState(0);
 
   const handleItems = () => {
-    const res = sumItemsOnCart();
+    const res = sumItemsOnCart(cart);
 
     if (res != items) {
       setItems(res);
