@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { cartSelector } from "@/store/cart";
 
@@ -29,8 +29,10 @@ export default function Navbar({ openCart }) {
     <ContainerNavbar>
       <ContentNavbar>
         <Logo>
-          <source srcSet={MarvelLogoSVG} type="image/svg+xml" />
-          <img src={MarvelLogo} alt="Marvel Logo" />
+          <a href="/">
+            <source srcSet={MarvelLogoSVG} type="image/svg+xml" />
+            <img src={MarvelLogo} alt="Marvel Logo" />
+          </a>
         </Logo>
         <ButtonCart onClick={openCart}>
           <IconCart arial-label="Icone do carrinho" />
