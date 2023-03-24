@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { comicsSelector, getComics } from "@/store/comics";
+import { comicsSelector, setPage } from "@/store/comics";
 
 import CardComics from "@/components/CardComics";
 import Loading from "@/components/Loading";
@@ -11,10 +11,13 @@ import { scrollToTopAnimated } from "@/utils/scrollToTopAnimated";
 import { ContainerHome } from "./styles";
 
 export default function Home() {
-  const { comics, isLoading } = useSelector(comicsSelector);
+  const dispatch = useDispatch();
 
-  const [currentPage, setCurrentPage] = useState(1);
+  const { comics, isLoading, page } = useSelector(comicsSelector);
+
   const itemsPerPage = 20;
+
+  const [currentPage, setCurrentPage] = useState(page);
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
@@ -25,11 +28,13 @@ export default function Home() {
   const handlePrev = () => {
     scrollToTopAnimated();
     setCurrentPage(currentPage - 1);
+    dispatch(setPage(currentPage - 1));
   };
 
   const handleNext = () => {
     scrollToTopAnimated();
     setCurrentPage(currentPage + 1);
+    dispatch(setPage(currentPage + 1));
   };
 
   if (isLoading) {
@@ -38,6 +43,8 @@ export default function Home() {
 
   return (
     <ContainerHome>
+      <div>{currentPage + "/" + totalPages}</div>
+
       {currentItems.map((item) => (
         <CardComics item={item} key={item.id} />
       ))}

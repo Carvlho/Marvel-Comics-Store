@@ -34,6 +34,7 @@ export const getComics = createAsyncThunk("comics/get", async () => {
 
 const initialState = {
   comics: [],
+  page: 1,
   isError: null,
   isLoading: false,
   errorMessage: null,
@@ -49,6 +50,10 @@ export const comicsSlice = createSlice({
       state.errorMessage = null;
 
       return state;
+    },
+
+    setPage: (state, { payload }) => {
+      state.page = payload;
     },
   },
   extraReducers: (builder) => {
@@ -70,6 +75,6 @@ export const comicsSlice = createSlice({
   },
 });
 
-export const { clearState } = comicsSlice.actions;
+export const { clearState, setPage } = comicsSlice.actions;
 
 export const comicsSelector = (state) => state.comics;
