@@ -4,6 +4,7 @@ import { GlobalStyle } from "./globalStyles";
 import Navbar from "@/components/Navbar";
 import Home from "@/pages/Home";
 import ModalCart from "./components/ModalCart";
+import AppRoutes from "./routes/index.routes";
 
 function App() {
   const [toggleModal, setToggleModal] = useState(false);
@@ -16,7 +17,7 @@ function App() {
     <>
       <GlobalStyle />
       <Navbar openCart={handleModal} />
-      <Home />
+      <AppRoutes />
 
       <ModalCart isOpen={toggleModal} close={handleModal} />
     </>

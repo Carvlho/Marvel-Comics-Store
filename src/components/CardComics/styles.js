@@ -93,6 +93,8 @@ export const SkeletonLoading = styled.div`
 `;
 
 export const CardHeader = styled.div`
+  cursor: pointer;
+
   :hover img {
     animation: ${scaleAnimation} 0.5s ease-out forwards;
   }

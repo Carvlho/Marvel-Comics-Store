@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import { formatter } from "@/utils/formatterMoney";
 import { exchangeRates } from "@/utils/exchangeRates";
@@ -19,7 +20,9 @@ import {
 export default function CardComics({ item }) {
   const dispatch = useDispatch();
 
-  const { title, thumbnail, prices, comicType } = item;
+  const navigate = useNavigate();
+
+  const { id, title, thumbnail, prices, comicType } = item;
 
   const [isLoadingImage, setIsLoadingImage] = useState(true);
 
@@ -33,7 +36,7 @@ export default function CardComics({ item }) {
 
   return (
     <ContainerCard isRare={comicType === "raro" ? true : false}>
-      <CardHeader>
+      <CardHeader onClick={() => navigate("/comic/" + id)}>
         {isLoadingImage && <SkeletonLoading />}
         <ImageCard
           src={`${thumbnail.path}.${thumbnail.extension}`}
