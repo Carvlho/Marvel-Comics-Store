@@ -21,6 +21,22 @@ export const ContentNavbar = styled.div`
 
   padding: 0 30px;
   margin: 0 auto;
+`;
+
+export const Logo = styled.picture`
+  img {
+    max-height: 50px;
+  }
+`;
+
+export const ButtonCart = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+
+  width: 50px;
 
   > svg {
     max-height: 30px;
@@ -31,10 +47,26 @@ export const ContentNavbar = styled.div`
       fill: #724cf9;
     }
   }
-`;
 
-export const Logo = styled.picture`
-  img {
-    max-height: 50px;
+  .numberItems {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    transform: translate(25%, -50%);
+    transform-origin: 100% 0%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 20px;
+
+    font-size: 12px;
+    color: #fff;
+
+    border-radius: 50%;
+    padding: 0 6px;
+
+    background-color: #724cf9;
   }
 `;

@@ -179,6 +179,8 @@ export const Item = styled.div`
     grid-column-gap: 0px;
     grid-row-gap: 0px;
     width: 100%;
+
+    padding-left: 12px;
   }
 `;
 
