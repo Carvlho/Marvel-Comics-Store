@@ -72,6 +72,8 @@ export const Pagination = styled.div`
     border: none;
     background-color: transparent;
 
+    cursor: pointer;
+
     svg {
       width: 30px;
 
