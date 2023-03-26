@@ -43,6 +43,10 @@ export const ModalView = styled.div`
   @media screen and (max-width: 520px) {
     width: 100vw;
   }
+
+  @media screen and (min-width: 1440px) {
+    width: 30vw;
+  }
 `;
 
 export const ModalHeader = styled.div`
