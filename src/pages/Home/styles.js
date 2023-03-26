@@ -14,12 +14,18 @@ export const ContainerCards = styled.div`
   justify-content: center;
 
   @media screen and (max-width: 425px) {
+    grid-template-columns: repeat(1, 280px);
+    grid-row-gap: 2rem;
+  }
+
+  @media screen and (max-width: 280px) {
     grid-template-columns: repeat(1, 230px);
-    grid-gap: 1rem;
+    grid-row-gap: 2rem;
   }
 
   @media screen and (min-width: 426px) {
     grid-template-columns: repeat(2, 180px);
+    grid-row-gap: 2rem;
     grid-gap: 1rem;
   }
 
