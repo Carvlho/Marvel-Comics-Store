@@ -173,11 +173,24 @@ export default function ModalCart({ isOpen, close }) {
     }, [500]);
   };
 
+  const handleClose = () => {
+    if (checkoutSuccess) {
+      close();
+
+      setTimeout(() => {
+        setCheckoutSuccess(false);
+        dispatch(clearState());
+      }, [300]);
+    }
+
+    close();
+  };
+
   return (
     <ModalContainer isOpen={isOpen}>
       <ModalOverlay
         id="modalOverlay"
-        onClick={(e) => (e.target.id === "modalOverlay" ? close() : null)}
+        onClick={(e) => (e.target.id === "modalOverlay" ? handleClose() : null)}
       >
         <ModalView isOpen={isOpen}>
           <ContainerContentModal>
