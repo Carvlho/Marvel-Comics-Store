@@ -83,8 +83,8 @@ export const ContainerCard = styled.div`
 
 export const SkeletonLoading = styled.div`
   width: 100%;
-  height: 100%;
-  min-height: 150px;
+  height: auto;
+  min-height: 280px;
 
   background: #eee;
   background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
