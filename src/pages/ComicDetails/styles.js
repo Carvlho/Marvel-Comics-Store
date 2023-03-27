@@ -28,7 +28,7 @@ export const Comic = styled.div`
 
   color: #fafafa;
 
-  @media screen and (max-width: 425px) {
+  @media screen and (max-width: 540px) {
     flex-direction: column;
   }
 `;
@@ -54,7 +54,7 @@ export const DetailsComic = styled.div`
   margin: auto;
   padding-left: 30px;
 
-  @media screen and (max-width: 425px) {
+  @media screen and (max-width: 540px) {
     padding: 20px 0 0;
   }
 `;
