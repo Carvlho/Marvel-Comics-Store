@@ -1,5 +1,5 @@
 
-# Desafio Front-end Neoapp
+# Marvel Comics Store
 
 O desafio consiste em criar uma loja fictícia de quadrinhos da Marvel que permite aos usuários visualizar os quadrinhos da API oficial da Marvel, aplicar cupons de desconto e finalizar uma compra fictícia.
 
