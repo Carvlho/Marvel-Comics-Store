@@ -5,7 +5,6 @@ O desafio consiste em criar uma loja fictícia de quadrinhos da Marvel que permi
 
 ## Deploy
 
-- [Marvel Comics Store](https://marvelcomicsstore-desafio.vercel.app)
 - <a href="https://marvelcomicsstore-desafio.vercel.app" target="_blank">Marvel Comics Store</a>
 
 ## API
